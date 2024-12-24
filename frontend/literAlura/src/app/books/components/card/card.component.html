@@ -1,0 +1,45 @@
+<mat-card class="mat-card flex flex-column align-content: space-between;"  >
+
+  <img mat-card-image class="mat-card-image"
+  [src]=" book | bookImage "
+  [alt]="book.title">
+
+  <mat-card-header>
+    <mat-card-title style="font-size: 1.2rem;">   {{ book.title  | slice:0:40 }}   </mat-card-title>
+
+    <mat-card-subtitle *ngFor="let author of book.authors"> {{ author }} </mat-card-subtitle>
+
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="mt-2">
+    <h4> <strong>Idioma:</strong> {{ book.language }} </h4>
+    <p>
+      <strong>Numero de Descargas</strong> {{ book.downloadCount }}
+      <br>
+
+
+    </p>
+  </mat-card-content>
+
+
+
+  <mat-card-footer class="flex justify-content-between flex-wrap mat-card-actions  ">
+
+
+
+      <a mat-button
+      mat-raised href="{{book.imageBook}}" color="primary" target="_blank">
+      <mat-icon> menu_book </mat-icon>Leer</a>
+
+      <button mat-button
+      mat-raised
+      color="primary"
+      [routerLink]="['/books', book.Id]">
+      <mat-icon> read_more </mat-icon>
+      Ver Más
+      </button>
+
+  </mat-card-footer>
+
+</mat-card>
+

@@ -1,0 +1,41 @@
+
+
+
+<div class="col">
+  <div class="row m-3"><h2 class="text-5xl w-10 pb-2">Los eBooks gratis más descargados</h2>
+    <div class="flex flex-wrap align-items-center justify-content-center">
+      <app-carousel [books]="booksTopDownload"></app-carousel>
+    </div>
+  </div>
+  <div class="row">
+    <mat-divider class="mb-3" ></mat-divider>
+
+  </div>
+</div>
+
+
+<div class="col">
+  <div class="flex flex-column md:flex-row   align-items-center pb-2 m-3">
+
+    <h2 class="text-5xl w-10 ">Lista de eBooks +Descargados por autores</h2>
+
+    <mat-form-field  >
+      <mat-label>Favorite food</mat-label>
+      <mat-select [(value)]="selectedValue" (valueChange)="goSearchLanguage()">
+
+        @for (lang of langs; track lang) {
+          <mat-option [value]="lang.value">{{lang.lang}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+</div>
+<mat-divider class="mb-3"></mat-divider>
+
+  <div class="flex flex-wrap align-items-center justify-content-center">
+    <app-carousel [books]="booksTopLang"></app-carousel>
+  </div>
+
+

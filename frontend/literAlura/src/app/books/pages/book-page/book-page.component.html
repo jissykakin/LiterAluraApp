@@ -1,0 +1,89 @@
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="book; else divLoading" class="grid  p-3">
+
+<div class="col-12 sm:col-4 ">
+  <mat-card class="m-2 p-3">
+    <img mat-card-image [src]=" book | bookImage " [alt]="book.title" />
+
+    <mat-divider></mat-divider>
+
+    <mat-card-subtitle align="end">
+       Código: {{ book.Id }}
+    </mat-card-subtitle>
+  </mat-card>
+
+</div>
+
+<div class="col-12 sm:col-8 ">
+  <mat-card class="m-2 p-3">
+    <mat-card-header class="mb-2">
+      <mat-card-title> {{ book.title }} </mat-card-title>
+      <mat-card-subtitle *ngFor="let author of book.authors"> {{ author }} </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item><strong>Descargas: </strong>   {{ book.downloadCount }} </mat-list-item>
+        <mat-list-item><strong>Idioma: </strong>   {{ book.language }} </mat-list-item>
+        <mat-list-item> <strong>Medio: </strong> {{ book.mediaType }} </mat-list-item>
+
+        <mat-list-item> <strong>Categoria: </strong></mat-list-item>
+          <mat-chip-listbox>
+            <mat-chip *ngFor="let character of book.subjects.split('--') | slice: 0:2 ">
+              {{ character }}
+            </mat-chip>
+          </mat-chip-listbox>
+
+
+
+
+      </mat-list>
+    </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions align="end">
+
+
+    <a mat-button
+    mat-raised href="{{book.imageBook}}" color="primary" target="_blank">
+    <mat-icon> menu_book </mat-icon>Ver Libro</a>
+
+  <!-- <button mat-button
+  mat-raised
+  [routerLink]="['/books/edit', book.Id]">
+  <mat-icon> edit </mat-icon>
+  Editar
+  </button> -->
+
+    <button mat-button
+    mat-raised
+    (click)="goBack()"
+    [routerLink]="['/books/edit', book.Id]">
+    <mat-icon>undo</mat-icon>
+      Regresar
+    </button>
+
+  </mat-card-actions>
+
+
+
+  </mat-card>
+
+</div>
+
+
+
+
+
+
+
+</div>

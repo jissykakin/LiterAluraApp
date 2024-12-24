@@ -1,0 +1,97 @@
+<h1 class="mt-2 ml-2">
+  {{ (currentBook.Id) ? 'Editar' : 'Agregar'  }}
+   Book
+</h1>
+
+<mat-divider></mat-divider>
+
+<div class="grid">
+
+  <div class="col-12 sm:col-6">
+
+    <mat-card class="m-3">
+      <img class="p-3" [src]="currentBook | bookImage " alt="" mat-card-image>
+    </mat-card>
+
+  </div>
+
+  <div class="col-12 sm:col-6">
+    <mat-card class="m-3">
+      <mat-card-content>
+        <form class="grid" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="col-12 sm:col-6" >
+            <mat-label> Libros</mat-label>
+            <input
+            matInput required
+            formControlName="title"
+            type="text"/>
+          </mat-form-field>
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Alter Ego</mat-label>
+            <input
+            matInput required type="text"
+            formControlName="subjects"/>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label> Primera Aparición</mat-label>
+            <input
+            matInput required type="text"
+            formControlName="first_appearance"/>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Personajes</mat-label>
+            <input
+            matInput required type="text"
+            formControlName="viewBook"/>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label> Creador</mat-label>
+            <mat-select
+              formControlName="language"
+              required>
+              <mat-option
+               *ngFor="let language of languages"
+                [value]="language.id">
+                {{ language.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Alternative Image</mat-label>
+            <input
+            matInput type="number"
+            formControlName="downloadCount"/>
+          </mat-form-field>
+
+
+
+        </form>
+        <mat-divider ></mat-divider>
+        <mat-card-actions align="end" class="mt-2">
+
+
+          <button mat-flat-button
+          (click)="onDeleteBook()"
+          color="warn"
+           *ngIf="currentBook.Id"
+            >
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+          <span class="spacer"></span>
+          <button mat-raised-button color="primary"
+          (click)="onSubmit()">
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+</div>

@@ -1,0 +1,16 @@
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" headerPosition="below">
+  @for (pagina of paginas; track pagina) {
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">trip_origin</mat-icon>
+
+      </ng-template>
+      <div class="card-container">
+          <books-book-card *ngFor="let book of pagina" [book]="book" class="mat-card"></books-book-card>
+      </div>
+  </mat-tab>
+  }
+</mat-tab-group>
+
+

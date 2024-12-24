@@ -1,0 +1,17 @@
+mat-stepper{
+
+  width: 100%;
+}
+
+.card-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.mat-card {
+  flex: 1;
+
+}

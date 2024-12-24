@@ -1,0 +1,99 @@
+<div class="flex flex-column">
+
+  <h3>Buscador</h3>
+  <!-- [matAutocomplete]="auto" -->
+  <mat-form-field>
+    <mat-label> Buscador de Libros </mat-label>
+    <input type="text"
+    matInput
+    [formControl]="searchInput"
+    (input)="searchBook()"
+    [matAutocomplete]="auto"/>
+
+    <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelectedOption( $event )"
+    >
+
+        <mat-option *ngFor="let book of books" track hero [value]="book">
+          <img  class="example-option-img" [src]="book | bookImage " height="20">
+          <span> {{ book.title }}</span> |
+          <small> {{ book.subjects}}</small>
+        </mat-option>
+        <mat-option
+        *ngIf="books.length === 0 && searchInput.value && searchInput.value.length > 0">
+          No se encontro nada con el termino {{ searchInput.value }}
+        </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+  <ng-template #divLoading>
+    <mat-grid-list cols="1">
+      <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
+
+
+  <div *ngIf="selectedBook; else divLoading" class="grid  p-3">
+
+    <div class="col-12 sm:col-4 ">
+      <mat-card class="m-2 p-3">
+        <img mat-card-image [src]=" selectedBook | bookImage " [alt]="selectedBook.title" />
+
+        <mat-divider></mat-divider>
+
+        <mat-card-subtitle align="end">
+           Código: {{ selectedBook.Id }}
+        </mat-card-subtitle>
+      </mat-card>
+
+    </div>
+
+    <div class="col-12 sm:col-8 ">
+      <mat-card class="m-2 p-3">
+        <mat-card-header class="mb-2">
+          <mat-card-title> {{ selectedBook.title }} </mat-card-title>
+          <mat-card-subtitle *ngFor="let author of selectedBook.authors"> {{ author }} </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item><strong>Descargas: </strong>   {{ selectedBook.downloadCount }} </mat-list-item>
+            <mat-list-item><strong>Idioma: </strong>   {{ selectedBook.language }} </mat-list-item>
+            <mat-list-item> <strong>Medio: </strong> {{ selectedBook.mediaType }} </mat-list-item>
+
+            <mat-list-item> <strong>Categoria: </strong></mat-list-item>
+              <mat-chip-listbox>
+                <mat-chip *ngFor="let character of selectedBook.subjects.split('--') | slice: 0:2 ">
+                  {{ character }}
+                </mat-chip>
+              </mat-chip-listbox>
+
+
+
+
+          </mat-list>
+        </mat-card-content>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions align="end">
+
+
+        <a mat-button
+        mat-raised href="{{selectedBook.imageBook}}" color="primary" target="_blank">
+        <mat-icon> menu_book </mat-icon>Ver Libro</a>
+
+
+      </mat-card-actions>
+
+
+
+      </mat-card>
+
+</div>
+
